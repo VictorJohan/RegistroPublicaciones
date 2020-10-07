@@ -13,7 +13,7 @@ namespace RegistroPublicaciones.Entidades
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public string Genero { get; set; }
-        public Hyperlink Link { get; set; }
+        public string Link { get; set; }
         public DateTime Fecha { get; set; } = DateTime.Now;
     }
 }

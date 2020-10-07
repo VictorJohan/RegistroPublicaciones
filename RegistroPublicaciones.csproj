@@ -20,9 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DAL\" />
     <Folder Include="DATA\" />
-    <Folder Include="BLL\" />
   </ItemGroup>
 
 </Project>
