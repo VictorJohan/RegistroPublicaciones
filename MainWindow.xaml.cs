@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RegistroPublicaciones.UI;
+using RegistroPublicaciones.UI.Registros;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,18 @@ namespace RegistroPublicaciones
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            rPublicacion rPublicacion = new rPublicacion();
+            rPublicacion.Show();
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            cPublicacion cPublicacion = new cPublicacion();
+            cPublicacion.Show();
         }
     }
 }

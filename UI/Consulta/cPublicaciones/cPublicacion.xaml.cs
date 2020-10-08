@@ -15,9 +15,9 @@ namespace RegistroPublicaciones.UI
     /// <summary>
     /// Interaction logic for cPublicidad.xaml
     /// </summary>
-    public partial class cPublicidad : Window
+    public partial class cPublicacion : Window
     {
-        public cPublicidad()
+        public cPublicacion()
         {
             InitializeComponent();
         }
