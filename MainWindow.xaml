@@ -7,10 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Menu>
-            <MenuItem Header="Registrar Publicación" Click="MenuItem_Click"/>
-            <MenuItem Header="Consultar Publicación" Click="MenuItem_Click_1"/>
-            
-        </Menu>
+        <StackPanel Orientation="Vertical">
+            <Menu Height="20" VerticalAlignment="Top">
+                <MenuItem Header="Registrar Publicación" Click="MenuItem_Click"/>
+                <MenuItem Header="Consultar Publicación" Click="MenuItem_Click_1"/>
+            </Menu>
+           
+
+
+        </StackPanel>
     </Grid>
 </Window>

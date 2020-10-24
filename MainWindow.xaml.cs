@@ -1,7 +1,11 @@
-﻿using RegistroPublicaciones.UI;
+﻿using Microsoft.Win32;
+using RegistroPublicaciones.BLL;
+using RegistroPublicaciones.Entidades;
+using RegistroPublicaciones.UI;
 using RegistroPublicaciones.UI.Registros;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,5 +42,31 @@ namespace RegistroPublicaciones
             cPublicacion cPublicacion = new cPublicacion();
             cPublicacion.Show();
         }
+
+        public void Cargar()
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+                "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                //photo.Source = new BitmapImage(new Uri(op.FileName));
+                //Publicacion.Wallpaper = BitmapSourceToByteArray((BitmapSource)photo.Source);
+            }
+        }
+
+        private byte[] BitmapSourceToByteArray(BitmapSource image)
+        {
+            using (var stream = new MemoryStream())
+            {
+                var encoder = new PngBitmapEncoder(); // or some other encoder
+                encoder.Frames.Add(BitmapFrame.Create(image));
+                encoder.Save(stream);
+                return stream.ToArray();
+            }
+        }
+
     }
 }

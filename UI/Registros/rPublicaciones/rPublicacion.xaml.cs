@@ -1,8 +1,10 @@
 ﻿using Microsoft.Win32;
 using MyToolkit.Multimedia;
+using RegistroPublicaciones.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,15 +24,44 @@ namespace RegistroPublicaciones.UI.Registros
     /// </summary>
     public partial class rPublicacion : Window
     {
+        Publicaciones Publicacion = new Publicaciones();
+        
         public rPublicacion()
         {
             InitializeComponent();
+            
+            this.DataContext = Publicacion;
+        }
+
+        private void BuscarButton_Click(object sender, RoutedEventArgs e)
+        {
 
         }
 
-        private void Ir_Click(object sender, RoutedEventArgs e)
+        private void IrButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenUrl("https://stackoverflow.com/");
+            OpenUrl(LinkTextBox.Text);
+        }
+
+        private void InsertarButton_Click(object sender, RoutedEventArgs e)
+        {
+            Cargar();
+            InsertarButton.Content = "Cambiar";
+        }
+
+        private void NuevoButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EliminarButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GuardarButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void OpenUrl(string url)
@@ -41,7 +72,6 @@ namespace RegistroPublicaciones.UI.Registros
             }
             catch
             {
-                // hack because of this: https://github.com/dotnet/corefx/issues/10361
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
                     url = url.Replace("&", "^&");
@@ -61,5 +91,20 @@ namespace RegistroPublicaciones.UI.Registros
                 }
             }
         }
+
+        public void Cargar()
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+                "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                WallpaperImage.Source = new BitmapImage(new Uri(op.FileName));
+                //Publicacion.Wallpaper = BitmapSourceToByteArray((BitmapSource)photo.Source);
+            }
+        }
+
     }
 }

@@ -5,8 +5,73 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegistroPublicaciones.UI.Registros"
         mc:Ignorable="d"
-        Title="rPublicacion" Height="450" Width="800">
+        Title="rPublicacion" Height="480" Width="1000" WindowStartupLocation="CenterOwner" ResizeMode="CanMinimize">
     <Grid>
-        
+        <StackPanel Orientation="Vertical" Margin="10,10,10,10">
+
+            <StackPanel Orientation="Horizontal">
+                <!--Panel Lateral Izquierdo-->
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Video Id" FontSize="11"/>
+                    <!--Publicacion Id/Boton Buscar-->
+                    <StackPanel Orientation="Horizontal">
+                        <!--TextBox-->
+                        <TextBox Name="VideoIdTextBox" Height="20" Width="336" Text="{Binding PublicacionId}" Margin="5,0" HorizontalAlignment="Left"/>
+                        <!--Button-->
+                        <Button Name="BuscarButton" Height="20" Width="60" Click="BuscarButton_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Buscar" FontSize="11" Padding="1"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <!--NombreVideo-->
+                    <Label Content="Nombre Video" FontSize="11"/>
+                    <TextBox Name="NombreVideoTextBox" Text="{Binding Nombre}" Height="20" Width="400" HorizontalAlignment="Left" Margin="5,0"/>
+
+                    <!--Descripcion-->
+                    <Label Content="Descripción" FontFamily="11"/>
+                    <TextBox Name="DescripcionTextBox" Text="{Binding Descripcion}" Width="400" Height="150" HorizontalAlignment="Left" Margin="5,0"/>
+
+                    <!--Genero-->
+                    <Label Content="Género" FontSize="11"/>
+                    <ComboBox Name="GeneroComboBox" SelectedValue="{Binding GeneroId}" Width="400"  HorizontalAlignment="Left" Margin="5,0" Padding="6,2,5,3"/>
+
+                    <!--Nombre Cancion-->
+                    <Label Content="Nombre Canción" FontSize="11"/>
+                    <TextBox Name="NombreCancionTextBox" Text="{Binding NombreCancion}" Height="20" Width="400" HorizontalAlignment="Left" Margin="5,0"/>
+
+                    <!--Link-->
+                    <Label Content="Link" FontSize="11"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Name="LinkTextBox" Text="{Binding Link}" Foreground="#FF1F93F3" Height="20" Width="336" Margin="5,0"/>
+                        <Button Name="IrButton" Height="20" Width="60" Click="IrButton_Click">
+                            <Label Content="Ir" FontSize="11" Padding="1"/>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <!--Panel Lateral Derecho-->
+                <StackPanel Orientation="Vertical" Margin="25,0,0,0">
+                    <!--Wallpaper-->
+                    <Label Content="Wallpaper Asignado" FontSize="11" Padding="0,5,5,5"/>
+                    <StackPanel  Width="500" Height="281" Background="Silver">
+                        <Image Name="WallpaperImage" Stretch="Uniform"/>
+                    </StackPanel>
+
+                    <Button Name="InsertarButton" Height="20" Content="Insertar" Margin="0,5,0,0" Click="InsertarButton_Click"/>
+
+                    <StackPanel Orientation="Horizontal" Width="195" Margin="0,49,0,0">
+                        <Button Name="NuevoButton" Content="Nuevo" Height="20" Width="60" Click="NuevoButton_Click"/>
+                        <Button Name="EliminarButton" Content="Guardar" Margin="5,0" Height="20" Width="60" Click="EliminarButton_Click"/>
+                        <Button Name="GuardarButton" Content="Eliminar" Height="20" Width="60" Click="GuardarButton_Click"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </StackPanel>
+
+            
+            
+        </StackPanel>
     </Grid>
 </Window>
