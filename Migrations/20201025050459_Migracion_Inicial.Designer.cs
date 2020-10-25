@@ -9,7 +9,7 @@ using RegistroPublicaciones.DAL;
 namespace RegistroPublicaciones.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20201024210739_Migracion_Inicial")]
+    [Migration("20201025050459_Migracion_Inicial")]
     partial class Migracion_Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
