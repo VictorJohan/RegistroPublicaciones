@@ -21,31 +21,31 @@ namespace RegistroPublicaciones.DAL
             modelBuilder.Entity<Generos>().HasData(new Generos
             {
                GeneroId = 1,
-               Gnero = "Trap"
+               Genero = "Trap"
             });
 
             modelBuilder.Entity<Generos>().HasData(new Generos
             {
                GeneroId = 2,
-               Gnero = "Dubstep"
+               Genero = "Dubstep"
             });
 
             modelBuilder.Entity<Generos>().HasData(new Generos
             {
                GeneroId = 3,
-               Gnero = "House"
+               Genero = "House"
             });
 
             modelBuilder.Entity<Generos>().HasData(new Generos
             {
                GeneroId = 4,
-               Gnero = "Bass"
+               Genero = "Bass"
             });
 
              modelBuilder.Entity<Generos>().HasData(new Generos
             {
                GeneroId = 5,
-               Gnero = "Chill"
+               Genero = "Chill"
             });
 
 

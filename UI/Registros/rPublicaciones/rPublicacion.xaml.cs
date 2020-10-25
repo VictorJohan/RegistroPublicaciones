@@ -30,9 +30,9 @@ namespace RegistroPublicaciones.UI.Registros
         public rPublicacion()
         {
             InitializeComponent();
-            /*GeneroComboBox.ItemsSource = GenerosBLL.GetList();
+            GeneroComboBox.ItemsSource = GenerosBLL.GetList();
             GeneroComboBox.SelectedValuePath = "GeneroId";
-            GeneroComboBox.DisplayMemberPath = "Genero";*/
+            GeneroComboBox.DisplayMemberPath = "Genero";
             this.DataContext = Publicacion;
         }
 
@@ -70,10 +70,16 @@ namespace RegistroPublicaciones.UI.Registros
 
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!ValidarEliminar()) { return; }
 
+            if (PublicacionesBLL.Eliminar(Publicacion))
+            {
+                MessageBox.Show("Registro Eliminado.", "Se ha eliminado un registro.",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
-        //todo: Reviar estos metodos
+        
         private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
             if (PublicacionesBLL.Guardar(Publicacion))
@@ -131,6 +137,27 @@ namespace RegistroPublicaciones.UI.Registros
             Publicacion = new Publicaciones();
             this.DataContext = Publicacion;
         }
+
+        public bool ValidarEliminar()
+        {
+            bool confirmar;
+
+            var registro = PublicacionesBLL.Buscar(Publicacion.PublicacionId);
+            if (registro.Link != Publicacion.Link)
+            {
+                MessageBox.Show("Busque el registro que desea eliminar.", "Advertencia.",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            confirmar = MessageBox.Show("¿Seguro que deseas eliminar este registro?", "Eliminar.",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No;
+            if (confirmar) { return false; }
+
+            return true;
+        }
+
+        //todo: Hacer las validaciones
 
     }
 }

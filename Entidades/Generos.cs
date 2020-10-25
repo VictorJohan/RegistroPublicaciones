@@ -9,6 +9,6 @@ namespace RegistroPublicaciones.Entidades
     {
         [Key]
         public int GeneroId { get; set; }
-        public string Gnero { get; set; }
+        public string Genero { get; set; }
     }
 }

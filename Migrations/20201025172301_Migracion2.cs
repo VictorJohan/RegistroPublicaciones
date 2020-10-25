@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RegistroPublicaciones.Migrations
 {
-    public partial class Migracion_Inicial : Migration
+    public partial class Migracion2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace RegistroPublicaciones.Migrations
                 {
                     GeneroId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Gnero = table.Column<string>(nullable: true)
+                    Genero = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,27 +47,27 @@ namespace RegistroPublicaciones.Migrations
 
             migrationBuilder.InsertData(
                 table: "Generos",
-                columns: new[] { "GeneroId", "Gnero" },
+                columns: new[] { "GeneroId", "Genero" },
                 values: new object[] { 1, "Trap" });
 
             migrationBuilder.InsertData(
                 table: "Generos",
-                columns: new[] { "GeneroId", "Gnero" },
+                columns: new[] { "GeneroId", "Genero" },
                 values: new object[] { 2, "Dubstep" });
 
             migrationBuilder.InsertData(
                 table: "Generos",
-                columns: new[] { "GeneroId", "Gnero" },
+                columns: new[] { "GeneroId", "Genero" },
                 values: new object[] { 3, "House" });
 
             migrationBuilder.InsertData(
                 table: "Generos",
-                columns: new[] { "GeneroId", "Gnero" },
+                columns: new[] { "GeneroId", "Genero" },
                 values: new object[] { 4, "Bass" });
 
             migrationBuilder.InsertData(
                 table: "Generos",
-                columns: new[] { "GeneroId", "Gnero" },
+                columns: new[] { "GeneroId", "Genero" },
                 values: new object[] { 5, "Chill" });
 
             migrationBuilder.CreateIndex(

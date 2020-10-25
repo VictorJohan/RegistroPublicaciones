@@ -2,8 +2,8 @@
 
   <PropertyGroup>
 
-	
-	<StartworkinDirectory>$(MSBuildProjectDirectory)</StartworkinDirectory>  
+	<StartworkinDirectory>$(MSBuildProjectDirectory)</StartworkinDirectory> 
+	  
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
@@ -21,6 +21,12 @@
 
   <ItemGroup>
     <Folder Include="DATA\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DATA\Publicaciones.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

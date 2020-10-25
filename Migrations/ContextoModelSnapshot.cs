@@ -22,7 +22,7 @@ namespace RegistroPublicaciones.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Gnero")
+                    b.Property<string>("Genero")
                         .HasColumnType("TEXT");
 
                     b.HasKey("GeneroId");
@@ -33,27 +33,27 @@ namespace RegistroPublicaciones.Migrations
                         new
                         {
                             GeneroId = 1,
-                            Gnero = "Trap"
+                            Genero = "Trap"
                         },
                         new
                         {
                             GeneroId = 2,
-                            Gnero = "Dubstep"
+                            Genero = "Dubstep"
                         },
                         new
                         {
                             GeneroId = 3,
-                            Gnero = "House"
+                            Genero = "House"
                         },
                         new
                         {
                             GeneroId = 4,
-                            Gnero = "Bass"
+                            Genero = "Bass"
                         },
                         new
                         {
                             GeneroId = 5,
-                            Gnero = "Chill"
+                            Genero = "Chill"
                         });
                 });
 
