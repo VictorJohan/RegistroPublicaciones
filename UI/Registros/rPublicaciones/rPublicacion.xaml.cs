@@ -30,15 +30,26 @@ namespace RegistroPublicaciones.UI.Registros
         public rPublicacion()
         {
             InitializeComponent();
-            GeneroComboBox.ItemsSource = GenerosBLL.GetList();
+            /*GeneroComboBox.ItemsSource = GenerosBLL.GetList();
             GeneroComboBox.SelectedValuePath = "GeneroId";
-            GeneroComboBox.DisplayMemberPath = "Genero";
+            GeneroComboBox.DisplayMemberPath = "Genero";*/
             this.DataContext = Publicacion;
         }
 
         private void BuscarButton_Click(object sender, RoutedEventArgs e)
         {
+            var encontrado = PublicacionesBLL.Buscar(int.Parse(VideoIdTextBox.Text));
 
+            if(encontrado != null)
+            {
+                Publicacion = encontrado;
+                this.DataContext = Publicacion;
+            }
+            else
+            {
+                MessageBox.Show("No se encontro ningún registro con este Id.", "No hay resultados.",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         private void IrButton_Click(object sender, RoutedEventArgs e)
@@ -54,7 +65,7 @@ namespace RegistroPublicaciones.UI.Registros
 
         private void NuevoButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Limpiar();
         }
 
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
@@ -62,9 +73,15 @@ namespace RegistroPublicaciones.UI.Registros
 
         }
 
+        //todo: Reviar estos metodos
         private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (PublicacionesBLL.Guardar(Publicacion))
+            {
+                Limpiar();
+                MessageBox.Show("Registro Guardado.", "Exito.",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         private void OpenUrl(string url)
@@ -107,6 +124,12 @@ namespace RegistroPublicaciones.UI.Registros
                 WallpaperImage.Source = new BitmapImage(new Uri(op.FileName));
                 //Publicacion.Wallpaper = BitmapSourceToByteArray((BitmapSource)photo.Source);
             }
+        }
+
+        public void Limpiar()
+        {
+            Publicacion = new Publicaciones();
+            this.DataContext = Publicacion;
         }
 
     }

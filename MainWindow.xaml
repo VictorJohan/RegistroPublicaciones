@@ -11,6 +11,7 @@
             <Menu Height="20" VerticalAlignment="Top">
                 <MenuItem Header="Registrar Publicación" Click="MenuItem_Click"/>
                 <MenuItem Header="Consultar Publicación" Click="MenuItem_Click_1"/>
+                <MenuItem Header="Registro Género" Click="MenuItem_Click_2"/>
             </Menu>
            
 

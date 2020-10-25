@@ -10,6 +10,7 @@ namespace RegistroPublicaciones.DAL
     {
         public DbSet<Publicaciones> Publicaciones { get; set; }
         public DbSet<Generos> Generos { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite(@"Data Source=DATA/Publicaciones.db");

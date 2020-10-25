@@ -3,6 +3,7 @@ using RegistroPublicaciones.BLL;
 using RegistroPublicaciones.Entidades;
 using RegistroPublicaciones.UI;
 using RegistroPublicaciones.UI.Registros;
+using RegistroPublicaciones.UI.Registros.rGeneros;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -68,5 +69,10 @@ namespace RegistroPublicaciones
             }
         }
 
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            rGeneros rGeneros = new rGeneros();
+            rGeneros.Show();
+        }
     }
 }

@@ -1,0 +1,33 @@
+﻿<Window x:Class="RegistroPublicaciones.UI.Registros.rGeneros.rGeneros"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RegistroPublicaciones.UI.Registros.rGeneros"
+        mc:Ignorable="d"
+        Title="Registrar Generos" Height="200" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="CanMinimize">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="10,10,10,10">
+            <!--Genero Id-->
+            <Label Content="Género Id" FontSize="11"/>
+            <StackPanel Orientation="Horizontal">
+                <!--Tetx Box-->
+                <TextBox Name="GeneroIdTextBox" Text="{Binding GeneroId}" Width="185" Height="20" HorizontalAlignment="Left" Margin="5,0"/>
+                <!--Button-->
+                <Button Name="BuscarButton" Content="Buscar" Height="20" Width="60" Click="BuscarButton_Click"/>
+            </StackPanel>
+
+            <!--Genero-->
+            <Label Content="Género" FontSize="11"/>
+            <TextBox Name="GeneroTextBox" Text="{Binding Genero}" Width="250" Height="20" HorizontalAlignment="Left" Margin="5,0"/>
+            
+            <!--Panel de botones-->
+            <StackPanel Orientation="Horizontal" Margin="0,17,0,0" Width="190">
+                <Button Name="NuevoButton" Width="60" Height="20" Content="Nuevo" Click="NuevoButton_Click"/>
+                <Button Name="GuardarButton" Width="60" Height="20" Content="Guardar" Margin="5,0" Click="GuardarButton_Click"/>
+                <Button Name="EliminarButton" Width="60" Height="20" Content="Eliminar" Click="EliminarButton_Click"/>
+            </StackPanel>
+            
+        </StackPanel>
+    </Grid>
+</Window>
