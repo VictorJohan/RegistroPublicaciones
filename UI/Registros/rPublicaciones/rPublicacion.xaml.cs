@@ -28,6 +28,7 @@ namespace RegistroPublicaciones.UI.Registros
     public partial class rPublicacion : Window
     {
         Publicaciones Publicacion = new Publicaciones();
+        private int previousLineCount = 0;
         byte[] wallpaper;
 
         public rPublicacion()
@@ -242,5 +243,12 @@ namespace RegistroPublicaciones.UI.Registros
                 InsertarButton.Content = "Insertar";
         }
 
+        private void DescripcionTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (DescripcionTextBox.LineCount > previousLineCount)
+            {
+                previousLineCount = DescripcionTextBox.LineCount;
+            }
+        }
     }
 }

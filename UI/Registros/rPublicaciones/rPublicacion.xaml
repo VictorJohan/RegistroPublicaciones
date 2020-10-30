@@ -3,75 +3,69 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:RegistroPublicaciones.UI.Registros"
         mc:Ignorable="d"
-        Title="rPublicacion" Height="480" Width="1000" WindowStartupLocation="CenterOwner" ResizeMode="CanMinimize">
+        Title="Registro Publicación" Height="510" Width="1040" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid>
         <StackPanel Orientation="Vertical" Margin="10,10,10,10">
 
             <StackPanel Orientation="Horizontal">
                 <!--Panel Lateral Izquierdo-->
                 <StackPanel Orientation="Vertical">
-                    <Label Content="Video Id" FontSize="11"/>
-                    <!--Publicacion Id/Boton Buscar-->
+
+                    <!--TextBox/Boton Buscar-->
                     <StackPanel Orientation="Horizontal">
                         <!--TextBox-->
-                        <TextBox Name="VideoIdTextBox" Height="20" Width="336" Text="{Binding PublicacionId}" Margin="5,0" HorizontalAlignment="Left"/>
-                        <!--Button-->
-                        <Button Name="BuscarButton" Height="20" Width="60" Click="BuscarButton_Click">
-                            <StackPanel Orientation="Horizontal">
-                                <Label Content="Buscar" FontSize="11" Padding="1"/>
-                            </StackPanel>
-                        </Button>
+                        <TextBox Name="VideoIdTextBox" Text="{Binding PublicacionId}" FontSize="20" Width="400" HorizontalAlignment="Left" Margin="5,0" materialDesign:HintAssist.Hint="Video Id" materialDesign:HintAssist.IsFloating="True" />
+                        <!--Boton-->
+                        <Button Name="BuscarButton" Background="Snow" Height="20" FontSize="11" Content="Buscar" Click="BuscarButton_Click" Padding="16,1,16,4" Margin="0,23,0,0"/>
                     </StackPanel>
 
                     <!--NombreVideo-->
-                    <Label Content="Nombre Video" FontSize="11"/>
-                    <TextBox Name="NombreVideoTextBox" Text="{Binding Nombre}" Height="20" Width="400" HorizontalAlignment="Left" Margin="5,0"/>
+                    <TextBox Name="NombreVideoTextBox" Text="{Binding Nombre}" FontSize="20"   Margin="5,5,5,0" materialDesign:HintAssist.Hint="Nombre Video" materialDesign:HintAssist.IsFloating="True"/>
 
                     <!--Descripcion-->
-                    <Label Content="Descripción" FontFamily="11"/>
-                    <TextBox Name="DescripcionTextBox" Text="{Binding Descripcion}" Width="400" Height="150" HorizontalAlignment="Left" Margin="5,0"/>
+
+                    <TextBox Name="DescripcionTextBox" Text="{Binding Descripcion}" FontSize="20" Height="150"  Margin="5,5,5,0" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Descripción" materialDesign:HintAssist.IsFloating="True" TextChanged="DescripcionTextBox_TextChanged"/>
 
                     <!--Genero-->
-                    <Label Content="Género" FontSize="11"/>
-                    <ComboBox Name="GeneroComboBox" SelectedValue="{Binding GeneroId}" Width="400"  HorizontalAlignment="Left" Margin="5,0" Padding="6,2,5,3"/>
+                    <ComboBox Name="GeneroComboBox" SelectedValue="{Binding GeneroId}"  FontSize="20"  Margin="5,5,5,0"  Padding="2,0,0,5" materialDesign:HintAssist.Hint="Género" materialDesign:HintAssist.IsFloating="True"/>
 
                     <!--Nombre Cancion-->
-                    <Label Content="Nombre Canción" FontSize="11"/>
-                    <TextBox Name="NombreCancionTextBox" Text="{Binding NombreCancion}" Height="20" Width="400" HorizontalAlignment="Left" Margin="5,0"/>
+                    <TextBox Name="NombreCancionTextBox" Text="{Binding NombreCancion}" FontSize="20"  Margin="5,5,5,0" materialDesign:HintAssist.Hint="Nombre Canción" materialDesign:HintAssist.IsFloating="True"/>
 
                     <!--Link-->
-                    <Label Content="Link" FontSize="11"/>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Name="LinkTextBox" Text="{Binding Link}" Foreground="#FF1F93F3" Height="20" Width="336" Margin="5,0"/>
-                        <Button Name="IrButton" Height="20" Width="60" Click="IrButton_Click">
-                            <Label Content="Ir" FontSize="11" Padding="1"/>
-                        </Button>
+                        <TextBox Name="LinkTextBox" Text="{Binding Link}" FontSize="20" Width="400" Margin="5,5,5,0"  materialDesign:HintAssist.Hint="Link" materialDesign:HintAssist.IsFloating="True"/>
+                        <Button Name="IrButton" Content="Ir" Background="Snow"  FontSize="11" Height="20" Width="60" Click="IrButton_Click" Padding="16,1,16,4" Margin="0,23,0,0"/>
                     </StackPanel>
                 </StackPanel>
 
                 <!--Panel Lateral Derecho-->
                 <StackPanel Orientation="Vertical" Margin="25,0,0,0">
                     <!--Wallpaper-->
-                    <Label Content="Wallpaper Asignado" FontSize="11" Padding="0,5,5,5"/>
-                    <StackPanel  Width="500" Height="281" Background="Silver">
+                    <Label Content="Wallpaper Asignado" FontSize="15" Padding="0,5,5,5"/>
+                    <StackPanel  Width="500" Height="281" Background="#FFF1DFDF">
                         <Image Name="WallpaperImage" Stretch="Uniform"/>
                     </StackPanel>
 
-                    <Button Name="InsertarButton" Height="20" Content="Insertar" Margin="0,5,0,0" Click="InsertarButton_Click"/>
+                    <Button Name="InsertarButton" Height="20" Background="Snow" Content="Insertar" Margin="0,5,0,0" Click="InsertarButton_Click" Padding="16,-4,16,0" />
 
-                    <StackPanel Orientation="Horizontal" Width="225" Margin="0,49,0,0">
-                        <Button Name="NuevoButton" Content="Nuevo" Height="20" Width="60" Click="NuevoButton_Click"/>
-                        <Button Name="GuardarButton" Content="Guardar" Height="20" Width="60" Margin="20,0,20,0" Click="GuardarButton_Click"/>
-                        <Button Name="EliminarButton" Content="Eliminar"  Height="20" Width="60" Click="EliminarButton_Click"/>
+                    <StackPanel Orientation="Horizontal" Width="223" Margin="0, 30">
+                        <!--Nuevo-->
+                        <Button Name="NuevoButton" Content="Nuevo" Background="Snow" FontSize="11" Height="20" Click="NuevoButton_Click" Padding="16,1,16,4"/>
+                        <!--Guardar-->
+                        <Button Name="GuardarButton" Height="20" Background="Snow" Content="Guardar" FontSize="11" Padding="16,1,16,4" Click="GuardarButton_Click" Margin="5,0,0,0"/>
+                        <!--Eliminar-->
+                        <Button Name="EliminarButton" Height="20" Background="Snow" Content="Eliminar" FontSize="11" Padding="16,1,16,4" Click="EliminarButton_Click" Margin="5,0,0,0"/>
                     </StackPanel>
 
                 </StackPanel>
             </StackPanel>
 
-            
-            
+
+
         </StackPanel>
     </Grid>
 </Window>
