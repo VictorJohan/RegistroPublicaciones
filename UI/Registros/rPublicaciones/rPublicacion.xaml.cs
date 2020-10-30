@@ -6,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +28,7 @@ namespace RegistroPublicaciones.UI.Registros
     public partial class rPublicacion : Window
     {
         Publicaciones Publicacion = new Publicaciones();
-        
+        byte[] wallpaper;
         public rPublicacion()
         {
             InitializeComponent();
@@ -44,6 +46,8 @@ namespace RegistroPublicaciones.UI.Registros
             {
                 Publicacion = encontrado;
                 this.DataContext = Publicacion;
+                WallpaperImage.Source = LoadImage(Publicacion.Wallpaper);
+                EstadoBotonInsertar();
             }
             else
             {
@@ -60,12 +64,49 @@ namespace RegistroPublicaciones.UI.Registros
         private void InsertarButton_Click(object sender, RoutedEventArgs e)
         {
             Cargar();
-            InsertarButton.Content = "Cambiar";
+            Publicacion.Wallpaper = wallpaper;
+            EstadoBotonInsertar();
+            
+        }
+
+        private static BitmapImage LoadImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
         }
 
         private void NuevoButton_Click(object sender, RoutedEventArgs e)
         {
             Limpiar();
+        }
+
+        private void GuardarButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Validar()) { return; }
+
+            if (PublicacionesBLL.Guardar(Publicacion))
+            {
+                Limpiar();
+                MessageBox.Show("Registro Guardado.", "Exito.",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Algo ha salido mal, no se pudo guardar el registro.", "Error.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
@@ -74,19 +115,14 @@ namespace RegistroPublicaciones.UI.Registros
 
             if (PublicacionesBLL.Eliminar(Publicacion))
             {
-                MessageBox.Show("Registro Eliminado.", "Se ha eliminado un registro.",
+                Limpiar();
+                MessageBox.Show("Se ha eliminado el registro.", "Registro Eliminado.", 
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
-        }
-
-        
-        private void GuardarButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (PublicacionesBLL.Guardar(Publicacion))
+            else
             {
-                Limpiar();
-                MessageBox.Show("Registro Guardado.", "Exito.",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Algo ha salido mal, no se pudo eliminar el registro.", "Error.",
+                   MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -128,7 +164,7 @@ namespace RegistroPublicaciones.UI.Registros
             if (op.ShowDialog() == true)
             {
                 WallpaperImage.Source = new BitmapImage(new Uri(op.FileName));
-                //Publicacion.Wallpaper = BitmapSourceToByteArray((BitmapSource)photo.Source);
+                wallpaper = File.ReadAllBytes(op.FileName);
             }
         }
 
@@ -136,6 +172,8 @@ namespace RegistroPublicaciones.UI.Registros
         {
             Publicacion = new Publicaciones();
             this.DataContext = Publicacion;
+            WallpaperImage.Source = null;
+            EstadoBotonInsertar();
         }
 
         public bool ValidarEliminar()
@@ -157,7 +195,33 @@ namespace RegistroPublicaciones.UI.Registros
             return true;
         }
 
-        //todo: Hacer las validaciones
+        public bool Validar()
+        {
+            if(VideoIdTextBox.Text.Length == 0 || DescripcionTextBox.Text.Length == 0 || GeneroComboBox.SelectedIndex == -1
+                || LinkTextBox.Text.Length == 0 || NombreCancionTextBox.Text.Length == 0)
+            {
+                MessageBox.Show("Asegurate de haber llenado todos los campos.", "Campos vacios.",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if(!Regex.IsMatch(LinkTextBox.Text, @"^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$"))
+            {
+                MessageBox.Show("Asegurate de haber introducido una URL valida, esta debe pertenecer a Youtube.", "URL no valida.",
+                   MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
+        public void EstadoBotonInsertar()
+        {
+            if(WallpaperImage.Source != null)
+                InsertarButton.Content = "Cambiar";
+            else
+                InsertarButton.Content = "Insertar";
+        }
 
     }
 }
