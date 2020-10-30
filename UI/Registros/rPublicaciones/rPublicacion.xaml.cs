@@ -29,15 +29,19 @@ namespace RegistroPublicaciones.UI.Registros
     {
         Publicaciones Publicacion = new Publicaciones();
         byte[] wallpaper;
+
         public rPublicacion()
         {
             InitializeComponent();
+            //Rellenando y configurando GeneroComboBox
             GeneroComboBox.ItemsSource = GenerosBLL.GetList();
             GeneroComboBox.SelectedValuePath = "GeneroId";
             GeneroComboBox.DisplayMemberPath = "Genero";
+
             this.DataContext = Publicacion;
         }
 
+        //Busaca un registro en la base de datos.
         private void BuscarButton_Click(object sender, RoutedEventArgs e)
         {
             var encontrado = PublicacionesBLL.Buscar(int.Parse(VideoIdTextBox.Text));
@@ -46,7 +50,7 @@ namespace RegistroPublicaciones.UI.Registros
             {
                 Publicacion = encontrado;
                 this.DataContext = Publicacion;
-                WallpaperImage.Source = LoadImage(Publicacion.Wallpaper);
+                WallpaperImage.Source = ConvertirArrayToImage(Publicacion.Wallpaper);//Convierte el array de Wallpaper en una imagen.
                 EstadoBotonInsertar();
             }
             else
@@ -56,11 +60,13 @@ namespace RegistroPublicaciones.UI.Registros
             }
         }
 
+        //Muestra el video en youtube.
         private void IrButton_Click(object sender, RoutedEventArgs e)
         {
             OpenUrl(LinkTextBox.Text);
         }
 
+        //Insserta una imagen para guardar en la base de datos.
         private void InsertarButton_Click(object sender, RoutedEventArgs e)
         {
             Cargar();
@@ -69,7 +75,8 @@ namespace RegistroPublicaciones.UI.Registros
             
         }
 
-        private static BitmapImage LoadImage(byte[] imageData)
+        //Convierte el array de byte a una imagen para mostrar.
+        private static BitmapImage ConvertirArrayToImage(byte[] imageData)
         {
             if (imageData == null || imageData.Length == 0) return null;
             var image = new BitmapImage();
@@ -87,11 +94,13 @@ namespace RegistroPublicaciones.UI.Registros
             return image;
         }
 
+        //Limpia el formulario para un nuevo registro.
         private void NuevoButton_Click(object sender, RoutedEventArgs e)
         {
             Limpiar();
         }
 
+        //Guarda un registro en la base de datos
         private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
             if (!Validar()) { return; }
@@ -109,6 +118,7 @@ namespace RegistroPublicaciones.UI.Registros
             }
         }
 
+        //Elimina un registro de la base de datos.
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
         {
             if (!ValidarEliminar()) { return; }
@@ -126,6 +136,7 @@ namespace RegistroPublicaciones.UI.Registros
             }
         }
 
+        //Abre el navegador con el Link del video.
         private void OpenUrl(string url)
         {
             try
@@ -154,6 +165,7 @@ namespace RegistroPublicaciones.UI.Registros
             }
         }
 
+        //Carga y muestra el wallpaper que se guardara en la base de datos.
         public void Cargar()
         {
             OpenFileDialog op = new OpenFileDialog();
@@ -168,6 +180,7 @@ namespace RegistroPublicaciones.UI.Registros
             }
         }
 
+        //Limpia el registro.
         public void Limpiar()
         {
             Publicacion = new Publicaciones();
@@ -176,18 +189,20 @@ namespace RegistroPublicaciones.UI.Registros
             EstadoBotonInsertar();
         }
 
+        //Valida el el evento eliminar.
         public bool ValidarEliminar()
         {
             bool confirmar;
 
             var registro = PublicacionesBLL.Buscar(Publicacion.PublicacionId);
-            if (registro.Link != Publicacion.Link)
+            if (registro.Link != Publicacion.Link)//Obliga al usuario a buscar el registro para borrarlo
             {
                 MessageBox.Show("Busque el registro que desea eliminar.", "Advertencia.",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
 
+            //Pregunta si desea eliminar el registro en caso de que la respuesta sea "No" returna false.
             confirmar = MessageBox.Show("¿Seguro que deseas eliminar este registro?", "Eliminar.",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No;
             if (confirmar) { return false; }
@@ -195,8 +210,10 @@ namespace RegistroPublicaciones.UI.Registros
             return true;
         }
 
+        //Este metodo valida los campos del registro.
         public bool Validar()
         {
+            //Valida que todos los campos esten llenos
             if(VideoIdTextBox.Text.Length == 0 || DescripcionTextBox.Text.Length == 0 || GeneroComboBox.SelectedIndex == -1
                 || LinkTextBox.Text.Length == 0 || NombreCancionTextBox.Text.Length == 0)
             {
@@ -205,6 +222,7 @@ namespace RegistroPublicaciones.UI.Registros
                 return false;
             }
 
+            //Valida que el link introducido sea un link de un video de Youtube
             if(!Regex.IsMatch(LinkTextBox.Text, @"^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$"))
             {
                 MessageBox.Show("Asegurate de haber introducido una URL valida, esta debe pertenecer a Youtube.", "URL no valida.",
@@ -215,6 +233,7 @@ namespace RegistroPublicaciones.UI.Registros
             return true;
         }
 
+        //Cambia el estado del boton de Insertar a Cambiar dependiendo de la circunstacias.
         public void EstadoBotonInsertar()
         {
             if(WallpaperImage.Source != null)
