@@ -3,6 +3,7 @@ using RegistroPublicaciones.DAL;
 using RegistroPublicaciones.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
@@ -10,13 +11,43 @@ namespace RegistroPublicaciones.BLL
 {
     public class GenerosBLL
     {
+
         public static bool Guardar(Generos genero)
+        {
+            Conexion conexion = new Conexion();
+            SqlCommand command = new SqlCommand("GuardarGeneros", conexion.Connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            bool ok = false;
+
+            try
+            {
+                conexion.AbrirConexion();
+                command.Parameters.AddWithValue("@GeneroId", genero.GeneroId);
+                command.Parameters.AddWithValue("@Genero", genero.Genero);
+
+                if (command.ExecuteNonQuery() > 0) { ok = true; }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.CerrarConexion();
+            }
+
+            return ok;
+        }
+
+
+        /*public static bool Guardar(Generos genero)
         {
             if (!Existe(genero.GeneroId))
                 return Insertar(genero);
             else
                 return Modificar(genero);
-        }
+        }*/
 
         public static bool Existe(int id)
         {

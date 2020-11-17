@@ -105,8 +105,8 @@ namespace RegistroPublicaciones.UI.Registros
         //Guarda un registro en la base de datos
         private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!Validar()) { return; }
-
+            //if (!Validar()) { return; }
+            Publicacion.GeneroId = 1;
             if (PublicacionesBLL.Guardar(Publicacion))
             {
                 Limpiar();

@@ -3,6 +3,7 @@ using RegistroPublicaciones.DAL;
 using RegistroPublicaciones.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -12,13 +13,48 @@ namespace RegistroPublicaciones.BLL
 {
     public class PublicacionesBLL
     {
+
         public static bool Guardar(Publicaciones publicacion)
+        {
+            Conexion conexion = new Conexion();
+            SqlCommand command = new SqlCommand("GuardarPublicacion", conexion.Connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            bool ok = false;
+
+            try
+            {
+                conexion.AbrirConexion();
+                command.Parameters.AddWithValue("@PublicacionId", publicacion.PublicacionId);
+                command.Parameters.AddWithValue("@Descripcion", publicacion.Descripcion);
+                command.Parameters.AddWithValue("@Nombre", publicacion.Nombre);
+                command.Parameters.AddWithValue("@GeneroId", publicacion.GeneroId);
+                command.Parameters.AddWithValue("@NombreCancion", publicacion.NombreCancion);
+                command.Parameters.AddWithValue("@Link", publicacion.Link);
+                command.Parameters.AddWithValue("@Fecha", publicacion.Fecha);
+                command.Parameters.AddWithValue("@Wallpaper", publicacion.Wallpaper);
+                
+                if(command.ExecuteNonQuery() > 0) { ok = true; }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conexion.CerrarConexion();
+            }
+
+            return ok;
+        }
+
+        /*public static bool Guardar(Publicaciones publicacion)
         {
             if (!Existe(publicacion.PublicacionId))
                 return Insertar(publicacion);
             else
                 return Modificar(publicacion);
-        }
+        }*/
 
         public static bool Existe(int id)
         {

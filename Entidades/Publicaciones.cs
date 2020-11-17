@@ -10,7 +10,7 @@ namespace RegistroPublicaciones.Entidades
 {
     public class Publicaciones
     {
-        [Key]
+        //[Key]
         public int PublicacionId { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
@@ -20,8 +20,8 @@ namespace RegistroPublicaciones.Entidades
         public DateTime Fecha { get; set; } = DateTime.Now;
         public byte[] Wallpaper { get; set; }
 
-        [ForeignKey("GeneroId")]
-        public virtual Generos Genero { get; set; }
+        /*[ForeignKey("GeneroId")]
+        public virtual Generos Genero { get; set; }*/
 
     }
 }

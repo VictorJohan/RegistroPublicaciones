@@ -49,7 +49,15 @@ namespace RegistroPublicaciones.UI.Registros.rGeneros
 
         private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (GenerosBLL.Guardar(Generos))
+            {
+                Limpiar();
+                MessageBox.Show("Guardado");
+            }
+            else
+            {
+                MessageBox.Show("No se guardo");
+            }
         }
 
         private void EliminarButton_Click(object sender, RoutedEventArgs e)

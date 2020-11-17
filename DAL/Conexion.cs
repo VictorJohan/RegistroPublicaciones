@@ -8,20 +8,19 @@ namespace RegistroPublicaciones.DAL
 {
     public class Conexion
     {
-        string cadena = "Data Source=bumixx.database.windows.net;Initial Catalog=Publicaciones;User ID=Bumixx;Password=Ci:84568003";
-        public SqlConnection connection = new SqlConnection();
+        public string cadena { get; set; } = "Data Source=bumixx.database.windows.net;Initial Catalog=Publicaciones;User ID=Bumixx;Password=Ci:84568003";
+        public SqlConnection Connection { get; set; } = new SqlConnection();
 
         public Conexion()
         {
-            connection.ConnectionString = cadena;
+            Connection.ConnectionString = cadena;
         }
 
         public void AbrirConexion()
         {
             try
             {
-                connection.Open();
-                MessageBox.Show("Abierta");
+                Connection.Open();
             }
             catch (Exception e)
             {
@@ -34,8 +33,7 @@ namespace RegistroPublicaciones.DAL
         {
             try
             {
-                connection.Close();
-                MessageBox.Show("Cerrada");
+                Connection.Close();
             }
             catch (Exception e)
             {

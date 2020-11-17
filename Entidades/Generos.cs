@@ -7,7 +7,7 @@ namespace RegistroPublicaciones.Entidades
 {
     public class Generos
     {
-        [Key]
+        //[Key]
         public int GeneroId { get; set; }
         public string Genero { get; set; }
     }
