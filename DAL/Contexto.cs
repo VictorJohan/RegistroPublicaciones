@@ -13,10 +13,11 @@ namespace RegistroPublicaciones.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source=DATA/Publicaciones.db");
+            //optionsBuilder.UseSqlite(@"Data Source=DATA/Publicaciones.db");
+           
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Generos>().HasData(new Generos
             {
@@ -49,6 +50,6 @@ namespace RegistroPublicaciones.DAL
             });
 
 
-        }
+        }*/
     }
 }

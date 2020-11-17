@@ -6,6 +6,7 @@ using RegistroPublicaciones.UI.Registros;
 using RegistroPublicaciones.UI.Registros.rGeneros;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,10 @@ namespace RegistroPublicaciones
     /// </summary>
     public partial class MainWindow : Window
     {
+        //todo: Agregar Excepcion Handler
+        //todo: Intenta poner el messageBox con material design
+        //todo: Hacer menu
+        //todo: Hacer presentacion
         public MainWindow()
         {
             InitializeComponent();
@@ -42,31 +47,6 @@ namespace RegistroPublicaciones
         {
             cPublicacion cPublicacion = new cPublicacion();
             cPublicacion.Show();
-        }
-
-        public void Cargar()
-        {
-            OpenFileDialog op = new OpenFileDialog();
-            op.Title = "Select a picture";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-                "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-                "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
-            {
-                //photo.Source = new BitmapImage(new Uri(op.FileName));
-                //Publicacion.Wallpaper = BitmapSourceToByteArray((BitmapSource)photo.Source);
-            }
-        }
-
-        private byte[] BitmapSourceToByteArray(BitmapSource image)
-        {
-            using (var stream = new MemoryStream())
-            {
-                var encoder = new PngBitmapEncoder(); // or some other encoder
-                encoder.Frames.Add(BitmapFrame.Create(image));
-                encoder.Save(stream);
-                return stream.ToArray();
-            }
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)

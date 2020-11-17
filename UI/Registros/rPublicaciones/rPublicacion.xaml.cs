@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using MyToolkit.Multimedia;
 using RegistroPublicaciones.BLL;
+using RegistroPublicaciones.DAL;
 using RegistroPublicaciones.Entidades;
 using System;
 using System.Collections.Generic;
@@ -30,15 +31,15 @@ namespace RegistroPublicaciones.UI.Registros
         Publicaciones Publicacion = new Publicaciones();
         private int previousLineCount = 0;
         byte[] wallpaper;
+        Conexion conexion = new Conexion();
 
         public rPublicacion()
         {
             InitializeComponent();
             //Rellenando y configurando GeneroComboBox
-            GeneroComboBox.ItemsSource = GenerosBLL.GetList();
-            GeneroComboBox.SelectedValuePath = "GeneroId";
-            GeneroComboBox.DisplayMemberPath = "Genero";
-
+            //GeneroComboBox.ItemsSource = GenerosBLL.GetList();
+            //GeneroComboBox.SelectedValuePath = "GeneroId";
+            //GeneroComboBox.DisplayMemberPath = "Genero";
             this.DataContext = Publicacion;
         }
 

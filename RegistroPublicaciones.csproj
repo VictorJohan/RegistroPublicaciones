@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 
-	<StartworkinDirectory>$(MSBuildProjectDirectory)</StartworkinDirectory> 
+	<!--<StartworkinDirectory>$(MSBuildProjectDirectory)</StartworkinDirectory>-->
 	  
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -20,16 +20,11 @@
     </PackageReference>
     <PackageReference Include="MyToolkit" Version="2.5.16" />
     <PackageReference Include="MyToolkit.Extended" Version="2.5.16" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="DATA\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="DATA\Publicaciones.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
